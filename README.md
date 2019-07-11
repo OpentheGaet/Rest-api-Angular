@@ -34,3 +34,7 @@ or symply for leting a comment.  That token changes at all reloading of pages or
 
 Lastly, the system is protected with cors exchange using the nelmio bundle, so that to restrict 
 the requests only for the application.
+
+# Contact
+
+If you have any notice, or you want to share something, do not hesitate to get me in touch :-)
