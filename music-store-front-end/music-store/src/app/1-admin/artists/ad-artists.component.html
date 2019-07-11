@@ -1,0 +1,95 @@
+<div id="title">
+    <h1>Our Styles</h1>
+  </div>
+  <section class="container" id="section-home">
+    <div class="col-md-9 card" style="min-height:25em; color: white; padding: 2em;">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let artist of artists, let i = index" class="text-dark">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ artist.name }}</td>
+                    <td><img src="./assets/admin/img/update.png" data-toggle="modal" data-target="#artist-modal-update" (click)="pressUpdArtist(artist)" /></td>
+                    <td><img src="./assets/admin/img/delete.png" data-toggle="modal" data-target="#artist-modal-delete" (click)="pressDelArtist(artist)" /></td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="btn btn-success" role="button" data-toggle="modal" data-target="#artist-modal-create">Add a user</button>
+    </div>
+  </section>
+
+  <!-- Modal for adding a style -->
+  <div class="modal" id="artist-modal-create">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Creating an artist</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form #fCreate="ngForm">
+                    <div class="form-group">
+                      <label for="cartist-name">Style</label>
+                      <input type="text" class="form-control" name="cartist-name" id="cartist-name" ngModel required placeholder="type an artist">
+                    </div>
+                    <button type="submit" class="btn btn-success" [disabled]="fCreate.invalid" (click)="createArtist()">Submit</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="close-cre-modal">no</button>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <!-- Modal for updating a style -->
+  <div class="modal" id="artist-modal-update">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Updating an artist</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form #fUpdate="ngForm">
+                    <div class="form-group">
+                      <label for="uartist-name">Style</label>
+                      <input type="text" class="form-control" name="uartist-name" id="uartist-name" ngModel required placeholder="type an artist">
+                      <input type="hidden" id="id-upd-artist">
+                    </div>
+                    <button type="submit" class="btn btn-success" [disabled]="fUpdate.invalid" (click)="updateArtist()">Submit</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="close-upd-modal">no</button>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <!-- Modal for deleting a style -->
+  <div class="modal" id="artist-modal-delete">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Deleting an artist</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>you are on the point to delete the following style : <span id="show-del-artist"></span></p>
+                <input type="hidden" id="id-del-artist">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteArtist()">yes</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="close-del-modal">no</button>
+            </div>
+        </div>
+    </div>
+  </div>

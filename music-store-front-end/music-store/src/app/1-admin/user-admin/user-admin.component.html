@@ -1,0 +1,167 @@
+<div id="title">
+  <h1>The admin users</h1>
+</div>
+<section class="container" id="section-home">
+  <div class="col-md-9 card" style="min-height:25em; color: white; padding: 2em;">
+      <table class="table table-striped">
+          <thead class="thead-dark">
+              <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Firstname</th>
+                  <th>Email</th>
+                  <th>Update</th>
+                  <th>Delete</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let user of users, let i = index" class="text-dark">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ user.name }}</td>
+                  <td>{{ user.first_name }}</td>
+                  <td>{{ user.email }}</td>
+                  <td><img src="./assets/admin/img/update.png" data-toggle="modal" data-target="#user-modal-update" (click)="pressUpdUser(user)"/></td>
+                  <td><img src="./assets/admin/img/delete.png" data-toggle="modal" data-target="#user-modal-delete" (click)="pressDelUser(user)"/></td>
+              </tr>
+          </tbody>
+      </table>
+      <button class="btn btn-success" role="button" data-toggle="modal" data-target="#user-modal-create">Add a user</button>
+  </div>
+</section>
+
+<!-- Modal for adding a user  -->
+<div class="modal" id="user-modal-create">
+  <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">Creating an user</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form #fRegister="ngForm" action="http://localhost:3000/api/upload" method="POST" enctype="multipart/form-data">
+              <div class="form-group">
+                <label for="user-name">Name</label>
+                <input type="text" class="form-control" id="user-name" ngModel required name="user-name" placeholder="type your name">
+              </div>
+              <div class="form-group">
+                <label for="user-firstname">Firstname</label>
+                <input type="text" class="form-control" id="user-firstname" name="user-firstname" ngModel required placeholder="type your firstname">
+              </div>
+              <div class="form-group">
+                <label for="user-address">Address</label>
+                <input type="text" class="form-control" id="user-address" name="user-address" ngModel required placeholder="type an address">
+              </div>
+              <div class="form-group">
+                <label for="user-number">Number</label>
+                <input type="number" class="form-control" id="user-number" name="user-number" ngModel required placeholder="type a number">
+              </div>
+              <div class="form-group">
+                <label for="user-postal">Postal</label>
+                <input type="number" class="form-control" id="user-postal" name="user-postal" ngModel required placeholder="type a postal code">
+              </div>
+              <div class="form-group">
+                <label for="user-city">City</label>
+                <input type="text" class="form-control" id="user-city" name="user-city" ngModel required placeholder="type a city">
+              </div>
+              <div class="form-group">
+                  <label for="user-email">Email</label>
+                  <input type="email" class="form-control" id="user-email" name="user-email" ngModel required placeholder="type an email">
+                </div>
+              <div class="form-group">
+                <label for="user-pass">Password</label>
+                <input type="password" class="form-control" id="user-pass" name="user-pass" ngModel required placeholder="type a password">
+              </div>
+              <div class="form-group">
+                <label for="confirm-pass">Confirm Password</label>
+                <input type="password" class="form-control" id="confirm-pass" name="confirm-pass" ngModel required placeholder="confirm the password">
+              </div>
+              <button type="submit" class="btn btn-primary" [disabled]="fRegister.invalid"
+                (click)="registerUser()">Submit</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal" id="close-cre-modal">no</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Modal for adding a user  -->
+<div class="modal" id="user-modal-update">
+  <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">Updating an user</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form #fUpdate="ngForm" action="http://localhost:3000/api/upload" method="POST" enctype="multipart/form-data">
+              <div class="form-group">
+                <label for="user-name-up">Name</label>
+                <input type="text" class="form-control" id="user-name-up" ngModel required name="user-name-up" placeholder="type your name">
+              </div>
+              <div class="form-group">
+                <label for="user-firstname-up">Firstname</label>
+                <input type="text" class="form-control" id="user-firstname-up" name="user-firstname-up" ngModel required placeholder="type your firstname">
+              </div>
+              <div class="form-group">
+                <label for="user-address-up">Address</label>
+                <input type="text" class="form-control" id="user-address-up" name="user-address-up" ngModel required placeholder="type an address">
+              </div>
+              <div class="form-group">
+                <label for="user-number-up">Number</label>
+                <input type="number" class="form-control" id="user-number-up" name="user-number-up" ngModel required placeholder="type a number">
+              </div>
+              <div class="form-group">
+                <label for="user-postal-up">Postal</label>
+                <input type="number" class="form-control" id="user-postal-up" name="user-postal-up" ngModel required placeholder="type a postal code">
+              </div>
+              <div class="form-group">
+                <label for="user-city-up">City</label>
+                <input type="text" class="form-control" id="user-city-up" name="user-city-up" ngModel required placeholder="type a city">
+              </div>
+              <div class="form-group">
+                  <label for="user-email-up">Email</label>
+                  <input type="email" class="form-control" id="user-email-up" name="user-email-up" ngModel required placeholder="type an email">
+                </div>
+              <div class="form-group">
+                <label for="user-pass-up">Password</label>
+                <input type="password" class="form-control" id="user-pass-up" name="user-pass-up" ngModel required placeholder="type a password">
+              </div>
+              <div class="form-group">
+                <label for="confirm-pass-up">Confirm Password</label>
+                <input type="password" class="form-control" id="confirm-pass-up" name="confirm-pass-up" ngModel required placeholder="confirm the password">
+              </div>
+              <input type="hidden" id="user-id-up">
+              <button type="submit" class="btn btn-primary" [disabled]="fUpdate.invalid"
+                (click)="updateUser()">Submit</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal" id="close-cre-modal">no</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Modal for deleting album -->
+<div class="modal" id="user-modal-delete">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">Deleting an user</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <p>you are on the point to delete the following album : <span id="show-del-album"></span></p>
+            <input type="hidden" id="id-del-album">
+            <input type="hidden" id="img-album">
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteAlbum()">yes</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">no</button>
+          </div>
+      </div>
+  </div>
+</div>
+

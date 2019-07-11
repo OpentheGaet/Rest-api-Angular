@@ -1,0 +1,10 @@
+.albs-images {
+  height: 200px;
+  width: 80%;
+  margin: 25px 0;
+  border: 2px solid #bbb;
+}
+
+.albs-images:hover {
+  opacity: 0.5;
+}

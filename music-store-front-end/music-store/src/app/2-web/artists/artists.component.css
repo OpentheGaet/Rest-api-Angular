@@ -1,0 +1,23 @@
+.intro {
+  border: 2px solid #bbb;
+  border-radius: 5px;
+  text-align: center;
+  margin: 50px 4%;
+  padding: 40px;
+}
+
+.artists, .styles{
+  padding-top: 6.5%;
+  padding-bottom: 5%;
+}
+
+.artists:hover, .styles:hover{
+  background-color:#00001a;
+  color: white !important;
+  transition: background-color 1s;
+}
+
+.artists:hover p, .styles:hover p {
+  color: white !important;
+  transition: color 1s;
+}

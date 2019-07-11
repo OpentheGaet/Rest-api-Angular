@@ -1,0 +1,76 @@
+<div id="title">
+  <h1>Comments</h1>
+</div>
+<section class="container" id="section-home">
+  <div class="col-md-9 card" style="min-height:25em; color: white; padding: 2em;">
+      <table class="table table-striped">
+          <thead class="thead-dark">
+              <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Firstname</th>
+                  <th>Album</th>
+                  <th>Comment</th>
+                  <th>Read</th>
+                  <th>Delete</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let comment of comments, let i = index" class="text-dark">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ comment.userName }}</td>
+                  <td>{{ comment.userFirstName }}</td>
+                  <td>{{ comment.albumName }}</td>
+                  <td>{{ comment.content | slice:0:10 }}</td>
+                  <td><img src="./assets/admin/img/update.png" data-toggle="modal" data-target="#comment-modal-read" (click)="getComment(comment)"/></td>
+                  <td><img src="./assets/admin/img/delete.png" data-toggle="modal" data-target="#comment-modal-delete" (click)="pressDelComment(comment)"/></td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+</section>
+
+  <!-- Modal for updating a style -->
+  <div class="modal" id="comment-modal-read">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Reading a comment</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <span>By {{ comment?.userFirstNmae }} {{ comment?.userName  }}, on the album {{ comment?.albumName }}</span>
+                <form #fUpdate="ngForm">
+                    <div class="form-group">
+                      <label for="com-content">Comment</label>
+                      <textarea class="form-control" name="com-content" id="com-content">{{ comment?.content }}</textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="close-upd-modal">no</button>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <!-- Modal for deleting a style -->
+  <div class="modal" id="comment-modal-delete">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Deleting a comment</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>You are on the point to delete the comment written by {{ comment?.userFirstName }} {{ comment?.userName }}, would you want to confirm this ?</p>
+                <input type="hidden" id="id-comment" value="{{ comment?.id }}">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteComment()">yes</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="close-del-modal">no</button>
+            </div>
+        </div>
+    </div>
+  </div>
+

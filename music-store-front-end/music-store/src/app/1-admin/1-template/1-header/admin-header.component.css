@@ -1,0 +1,60 @@
+header nav {
+  width: 100%;
+}
+
+header nav a {
+  font-weight: bold;
+  color: white !important;
+}
+
+header nav a:nth-of-type(1) {
+  margin-right: 2.5%;
+}
+
+header nav .logout{
+  margin-left: 75%;
+}
+
+header nav a:hover {
+  color: orange !important;
+  text-decoration: none;
+}
+
+#wrapper {
+  float: left;
+  margin-right: 6.5em;
+}
+
+main {
+  margin-top: 2em;
+}
+
+#sidebar-wrapper {
+  min-height: 110vh;
+  -webkit-transition: margin .25s ease-out;
+  -moz-transition: margin .25s ease-out;
+  -o-transition: margin .25s ease-out;
+  transition: margin .25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+  margin-top: 2em;
+  width: 15rem;
+}
+
+#sidebar-wrapper .list-group a {
+  color: white;
+}
+
+#page-content-wrapper {
+  min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}

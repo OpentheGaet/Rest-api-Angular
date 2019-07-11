@@ -1,0 +1,28 @@
+<div id="title">
+  <h1>The web users</h1>
+</div>
+<section class="container" id="section-home">
+  <div class="col-md-9 card" style="min-height:25em; color: white; padding: 2em;">
+      <table class="table table-striped">
+          <thead class="thead-dark">
+              <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Firstname</th>
+                  <th>Email</th>
+                  <th>Delete</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let user of users, let i = index" class="text-dark">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ user.name }}</td>
+                  <td>{{ user.first_name }}</td>
+                  <td>{{ user.email }}</td>
+                  <td><img src="./assets/admin/img/delete.png" data-toggle="modal" data-target="#album-modal-delete" (click)="pressDelAlbum(album)"/></td>
+              </tr>
+          </tbody>
+      </table>
+      <button class="btn btn-success" role="button" data-toggle="modal" data-target="#album-modal-create">Add a user</button>
+  </div>
+</section>

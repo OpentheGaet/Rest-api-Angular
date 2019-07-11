@@ -1,0 +1,18 @@
+<section id="connector-form" class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <form [formGroup]="logForm" action="http://localhost:3000/api/upload" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="log-email">Email</label>
+          <input type="email" formControlName="email" class="form-control" id="log-email" placeholder="type your name">
+        </div>
+        <div class="form-group">
+          <label for="log-pass">Password</label>
+          <input type="password" formControlName="password" class="form-control" id="log-pass" placeholder="type your firstname">
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="logForm.invalid"
+          (click)="logIn()">Submit</button>
+      </form>
+    </div>
+  </div>
+</section>

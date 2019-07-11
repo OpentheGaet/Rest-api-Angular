@@ -1,0 +1,142 @@
+<div id="title">
+  <h1>Our Albums</h1>
+</div>
+<section class="container" id="section-home">
+  <div class="col-md-9 card" style="min-height:25em; color: white; padding: 2em;">
+      <table class="table table-striped">
+          <thead class="thead-dark">
+              <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Style</th>
+                  <th>Artist</th>
+                  <th>Update</th>
+                  <th>Delete</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let album of albums, let i = index" class="text-dark">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ album.name }}</td>
+                  <td>{{ album.typesName }}</td>
+                  <td>{{ album.artistsName }}</td>
+                  <td><img src="./assets/admin/img/update.png" data-toggle="modal" data-target="#album-modal-update" (click)="pressUpdAlbum(album)"/></td>
+                  <td><img src="./assets/admin/img/delete.png" data-toggle="modal" data-target="#album-modal-delete" (click)="pressDelAlbum(album)"/></td>
+              </tr>
+          </tbody>
+      </table>
+      <button class="btn btn-success" role="button" data-toggle="modal" data-target="#album-modal-create">Add a user</button>
+  </div>
+</section>
+
+<!-- Modal for adding a album  -->
+<div class="modal" id="album-modal-create">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">Creating a album</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form #fCreate="ngForm" action="http://localhost:3000/api/upload" method="POST" enctype="multipart/form-data">
+              <div class="form-group">
+                <label for="c-album-name">Name</label>
+                <input type="text" class="form-control" id="c-album-name" ngModel required name="c-album-name" placeholder="type an artist">
+              </div>
+              <div class="form-group">
+                <label for="c-album-image">Image</label>
+                <input type="file" class="form-control" id="c-album-image" name="c-album-image" (change)="onChooseFile($event)" ngModel required name="c-album-image" placeholder="type an image">
+              </div>
+              <div class="form-group">
+                <label for="c-album-price">Price</label>
+                <input type="number" class="form-control" id="c-album-price" ngModel required name="c-album-price" placeholder="type a price">
+              </div>
+              <div class="form-group">
+                <label for="c-album-artist">Artist</label>
+                <select id="c-album-artist" name="c-album-artist" class="form-control" ngModel required>
+                  <option *ngFor="let artist of artists" value="{{ artist.id }}">{{ artist.name }}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="c-album-style">Style</label>
+                <select id="c-album-style" name="c-album-style" class="form-control" ngModel required>
+                  <option *ngFor="let style of styles" value="{{ style.id }}">{{ style.name }}</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-success" [disabled]="fCreate.invalid" (click)="createArtist()">Submit</button>
+          </form>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal" id="close-cre-modal">no</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Modal for updating a album  -->
+<div class="modal" id="album-modal-update">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">Updating a album</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+              <form #fUpdate="ngForm" action="http://localhost:3000/api/upload" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                  <label for="u-album-name">Name</label>
+                  <input type="text" class="form-control" id="u-album-name" ngModel required name="u-album-name" placeholder="type an artist">
+                </div>
+                <img class="img-fluid" id="display-img" />
+                <input type="hidden" id="img-name">
+                <div class="form-group">
+                  <label for="u-album-image">Image</label>
+                  <input type="file" class="form-control" id="u-album-image" name="u-album-image" (change)="onChooseFile($event)" ngModel required name="c-album-image" placeholder="type an image">
+                </div>
+                <div class="form-group">
+                  <label for="u-album-price">Price</label>
+                  <input type="number" class="form-control" id="u-album-price" name="u-album-price" ngModel required placeholder="type a price">
+                </div>
+                <div class="form-group">
+                  <label for="u-album-artist">Artist</label>
+                  <select id="u-album-artist" name="u-album-artist" class="form-control" ngModel required>
+                    <option *ngFor="let artist of artists" value="{{ artist.id }}" [selected]="artist.id == selArt">{{ artist.name }}</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="u-album-style">Style</label>
+                  <select id="u-album-style" name="u-album-style" class="form-control" ngModel required>
+                    <option *ngFor="let style of styles" value="{{ style.id }}" [selected]="style.id == selSty">{{ style.name }}</option>
+                  </select>
+                </div>
+                <input type="hidden" id="u-album-id">
+                <button type="submit" class="btn btn-success" [disabled]="fUpdate.invalid" (click)="updateAlbum()">Submit</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">no</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Modal for deleting album -->
+<div class="modal" id="album-modal-delete">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">Deleting a album</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <p>you are on the point to delete the following album : <span id="show-del-album"></span></p>
+            <input type="hidden" id="id-del-album">
+            <input type="hidden" id="img-album">
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteAlbum()">yes</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">no</button>
+          </div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,88 @@
+*::selection {
+  background-color: orange;
+  color: white;
+}
+
+/* Header and Navbar*/
+
+.navbar-color {
+  background-color: #00001a;
+}
+
+.nav-link:hover{
+  color:orange !important;
+}
+
+.action-home{
+  font-size: 1.5em;
+  font-weight: bold;
+  float: left;
+  margin: 15px 0;
+  margin-left: 1%;
+  margin-right: 20%;
+}
+
+.nav-item {
+  margin: 15px 0;
+  color: white !important;
+}
+
+.nav-item:hover {
+  color: orange !important;
+  text-decoration: none;
+}
+
+.active {
+  color: orange !important;
+}
+
+header button {
+  display: none;
+}
+
+.navbar-toggler {
+  background-color: orange !important;
+  color: white !important;
+  border: 1px solid orange !important;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+.header-options:nth-last-of-type(1) {
+  border: 1px solid rgba(255, 165, 0, 0.8);
+  width: 75px;
+  padding: 5px;
+  background-color: rgba(255, 165, 0, 0.8);
+  color: white;
+}
+
+.header-options:nth-last-of-type(1) {
+  margin-right: 1em;
+}
+
+@media screen and (max-width: 480px){
+
+  .action-home{
+      margin-top: 0px;
+      float: inherit;
+      clear: left;
+  }
+
+  nav {
+    display: none;
+  }
+
+  header button {
+    display: block;
+    margin-bottom: 20px;
+    background-color:orange;
+    color:white;
+    text-decoration:none;
+  }
+
+  #exCollapsingNavbar {
+      background-color: orange !important;
+      color: white !important;
+  }
+
+}

@@ -1,0 +1,43 @@
+<section id="slider">
+  <div id="component-slider" *ngIf="isLoggedIn; else isLoggedOut">
+    <button id="press-connect" (click)="showForm()">show Profile</button>
+    <button id="canceld-connect" (click)="hideForm()">canceld</button>
+    <div id="component-connector" class="container">
+      <div id="component-connector" class="col-md-4" id="form-connect">
+        <a role="button" routerLink="/register" class="log-pass">{{ user.firstname }}&nbsp;{{ user.name }}'s profile</a>
+        <button (click)="logOut()" class="log-pass">log out</button>
+      </div>
+    </div>
+  </div>
+  <ng-template #isLoggedOut>
+      <button id="press-connect" (click)="showForm()">connect</button>
+      <button id="canceld-connect" (click)="hideForm()">canceld</button>
+      <div  id="component-connector" class="container">
+        <form [formGroup]="connectForm" class="col-md-4" method="post" id="form-connect">
+          <div class="form-group">
+            <label for="email">Your Email</label>
+            <input type="email" formControlName="email" class="form-control" id="email">
+          </div>
+          <div class="form-group">
+            <label for="password">Your Password</label>
+            <input type="password" formControlName="password" class="form-control" id="password">
+          </div>
+          <button type="submit" class="log-pass" [disabled]="connectForm.invalid"
+            (click)="logIn()">Submit</button>
+          <a role="button" routerLink="/register" class="log-pass">Register</a>
+        </form>
+      </div>
+    </ng-template>
+  <div id="slider-accessories" style="background-image: url(src/assets/img/slider/music.png)">
+    <button id="before" (click)="goToBeforePics()"><img
+        src="./assets/img/slider/accessories/arrowheads-pointing-to-the-left.png" alt=""></button>
+    <button id="pause" (click)="pauseSlider()"><img src="./assets/img/slider/accessories/pause.png" alt=""></button>
+    <button id="play" (click)="playSlider()" style="display:none"><img
+        src="./assets/img/slider/accessories/play-button-sing.png" alt=""></button>
+    <button id="next" (click)="goToNextPics()"><img src="./assets/img/slider/accessories/forward-button.png"
+        alt=""></button>
+  </div>
+</section>
+
+<app-intro>
+</app-intro>

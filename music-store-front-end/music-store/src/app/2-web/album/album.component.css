@@ -1,0 +1,12 @@
+#alb-image {
+  height: 300px;
+  width: 90%;
+  margin-top: 150px;
+  border: 2px solid #bbb;
+}
+
+#album-info {
+  margin-top: 160px;
+  padding: 20px;
+  border: 2px solid grey;
+}

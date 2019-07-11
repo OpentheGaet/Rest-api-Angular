@@ -1,0 +1,135 @@
+#slider {
+  background-image: url('src/assets/img/slider/music.png');
+  background-size: 100%100%;
+  height: 600px;
+  display: block;
+  border: 1px solid black;
+}
+
+#slider-accessories{
+  text-align: center;
+  position: absolute;
+  top: 580px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
+#slider-accessories button{
+  padding : 15px;
+  border: 1px solid white;
+  border-radius: 50%;
+  background-color: rgb(255, 255, 255);
+}
+
+#slider-accessories button:hover{
+  background-color: rgb(0, 0, 56);
+  transition: background-color 1s;
+}
+
+#slider-accessories #before-disabled,
+#slider-accessories #next-disabled,
+#slider-accessories #before-disabled:hover,
+#slider-accessories #next-disabled:hover
+{
+  background-color: grey!important;
+}
+
+/*
+=========================================================
+# For Form connect (home page)
+=========================================================
+*/
+
+/* button for showing or hidding form */
+
+#press-connect, #canceld-connect {
+    margin-top: 25px;
+    margin-left: 2.5%;
+    border: 1px solid black;
+    width: 150px;
+    padding: 10px;
+    background-color: orange;
+    color: white;
+}
+
+#canceld-connect {
+    display: none;
+}
+
+#press-connect:hover, #canceld-connect:hover {
+    background-color: white;
+    transition: background-color 1s;
+    color: orange;
+}
+
+#press-connect:active, #canceld-connect:active{
+    background-color: #000038;
+}
+
+#component-connector {
+  display: none;
+}
+
+/* the form to connect the user */
+
+#form-connect {
+    position: relative;
+    z-index: 2;
+    background-color: rgba(0, 31, 170, 0.3);
+    border: 1px solid orange;
+    border-radius: 1px;
+    margin-top: 50px;
+    padding: 20px;
+}
+
+#form-connect label {
+    color: orange;
+}
+
+#login, #password {
+    background-color: rgba(250, 192, 3, 0.8);
+    color: #00001a;
+    border: 1px solid orange;
+}
+
+#form-connect a {
+    text-decoration: none;
+    padding-top: 9px !important;
+    padding-bottom: 10px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
+
+#form-connect .log-pass:nth-last-of-type(1) {
+    border: 1px solid rgba(255, 165, 0, 0.8);
+    width: 75px;
+    padding: 5px;
+    background-color: rgba(255, 165, 0, 0.8);
+    color: white;
+}
+
+#form-connect .log-pass:nth-last-of-type(1) {
+  margin-right: 1em;
+}
+
+#form-connect .log-pass:hover {
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.9);
+    transition: background-color 1s;
+    color: orange;
+}
+
+#form-connect .log-pass:active {
+    border: #000038;
+    background-color: #000038;
+}
+
+/*
+============================================================
+# End
+============================================================
+*/
+

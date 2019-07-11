@@ -1,0 +1,34 @@
+main {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.intro, .fetch-intro {
+  border: 2px solid #bbb;
+  border-radius: 5px;
+  text-align: center;
+  margin: 50px 4%;
+  padding: 40px;
+}
+
+.intro img, .fetch-intro img {
+  width: 60%;
+}
+
+#intro-blog a:hover {
+  color : white!important;
+}
+
+#intro-blog {
+  margin-right: 20%;
+}
+
+#show-info {
+  display: none;
+  min-height: 650px;
+}
+
+#show-info img {
+  width: 50%;
+  height: 100px;
+}

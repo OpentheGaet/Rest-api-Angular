@@ -1,0 +1,18 @@
+<section id="fetch-album" class="container">
+  <div class="row">
+    <div class="col-md-4">
+        <img src="./assets/img/albums/{{ album?.imageName }}" alt="" id="alb-image">
+    </div>
+    <div class="col-md-8" id="album-info">
+        <h3>{{ album?.name }}</h3>
+        <p>Artist : {{ album?.artistsName }}</p>
+        <p>Album name : {{ album?.name }}</p>
+        <p>Date of parution : {{ album?.publishedAt | date:'yyyy-MM-dd' }}</p>
+        <p>Music style : {{ album?.typesName }}</p>
+        <p class="text-primary">Price : {{ album?.price }} €.</p>
+        <input type="hidden" value="{{ album?.id }}">
+    </div>
+  </div>
+</section>
+
+<app-comment [albumId]="album?.id"></app-comment>

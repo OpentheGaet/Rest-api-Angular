@@ -1,0 +1,68 @@
+#alb-image {
+  height: 300px;
+  width: 90%;
+  margin-top: 150px;
+  border: 2px solid #bbb;
+}
+
+#album-info, .comment {
+  padding: 20px;
+  border: 2px solid grey;
+}
+
+#album-info {
+  margin-top: 160px;
+}
+
+.comment {
+  margin-top: 75px;
+  min-height: 200px;
+}
+
+.comment h6 {
+  text-align: center;
+  font-weight: bold;
+  background-color: rgb(196, 4, 4);
+  color: white;
+  padding: 10px;
+}
+
+.comment h6 span {
+  float: right;
+  color: white;
+}
+
+.comment img {
+  width: 100%;
+  float: left;
+}
+
+.comment span:nth-last-of-type(1) {
+  font-weight: bold;
+}
+
+.comment span:nth-last-child(1) {
+  color: rgb(20, 20, 20);
+}
+
+.comment .btn-danger {
+  float: right;
+}
+
+.comment form {
+  margin-top: 20px;
+}
+
+.comment .comment-identifier {
+  margin-top: 20px;
+  margin-left: 15%;
+}
+
+.comment textarea {
+  min-height: 200px;
+  border: 1px solid darkgrey;
+}
+
+.comment .modal-btn {
+  margin-left: 5%;
+}

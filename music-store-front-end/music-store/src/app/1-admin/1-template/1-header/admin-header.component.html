@@ -1,0 +1,21 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+      <a routerLink="/admin/home">Admin</a>
+      <button class="btn btn-light" id="menu-show" (click)="showMenu()" style="display:none">Toggle Menu</button>
+      <button class="btn btn-light" id="menu-hide" (click)="hideMenu()">Toggle Menu</button>
+      <button (click)="logOut()" class="btn btn-light logout">Exit</button>
+  </nav>
+</header>
+<section class="d-flex" id="wrapper">
+  <div class="bg-dark border-right" id="sidebar-wrapper">
+      <div class="list-group list-group-flush">
+          <a routerLink="/admin/home" class="list-group-item list-group-item-action bg-dark">Home</a>
+          <a routerLink="/admin/albums" class="list-group-item list-group-item-action bg-dark">Albums</a>
+          <a routerLink="/admin/styles" class="list-group-item list-group-item-action bg-dark">Syles</a>
+          <a routerLink="/admin/artists" class="list-group-item list-group-item-action bg-dark">Artists</a>
+          <a routerLink="/admin/comment" class="list-group-item list-group-item-action bg-dark">Comments</a>
+          <a routerLink="/admin/user-admin" class="list-group-item list-group-item-action bg-dark">Admin users</a>
+          <a routerLink="/admin/user" class="list-group-item list-group-item-action bg-dark">Web users</a>
+      </div>
+  </div>
+</section>

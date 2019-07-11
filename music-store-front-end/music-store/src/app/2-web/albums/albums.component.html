@@ -1,0 +1,7 @@
+<section id="fetch-albums" class="container">
+  <div class="row">
+    <div class="col-md-4" *ngFor="let album of albums, let i = index">
+      <a routerLink="/album/{{ album.id }}"><img src="./assets/img/albums/{{ album.imageName }}" class="albs-images" alt=""/></a>
+    </div>
+  </div>
+</section>

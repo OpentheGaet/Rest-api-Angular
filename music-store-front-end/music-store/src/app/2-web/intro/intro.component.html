@@ -1,0 +1,52 @@
+<main id="title">
+  <h1>Welcome to Music Store</h1>
+</main>
+<section id="intro-section" class="container">
+  <div class="row">
+    <div id="albums" class="col-md-3 intro">
+      <h3>Album</h3>
+      <div *ngIf="checkAlb">
+        <img src="./assets/img/home/music-album.png" id="ajax-album-show" alt="" (click)="setFalse()">
+      </div>
+      <div *ngIf="checkAlb == false">
+        <img src="./assets/img/home/music-album.png" id="ajax-album-show" alt="" (click)="fetchAlbums()">
+      </div>
+    </div>
+    <div id="styles" class="col-md-3 intro">
+      <h3>Style</h3>
+      <div *ngIf="checkSty">
+        <img src="./assets/img/home/style.png" id="ajax-style-show" alt="" (click)="setFalse()">
+      </div>
+      <div *ngIf="checkSty == false">
+        <img src="./assets/img/home/style.png" id="ajax-style-show" alt="" (click)="fetchStyles()">
+      </div>
+    </div>
+    <div id="artists" class="col-md-3 intro">
+      <h3>Artist</h3>
+      <div *ngIf="checkArt">
+        <img src="./assets/img/home/artist.png" id="ajax-artist-show" alt="" (click)="setFalse()">
+      </div>
+      <div *ngIf="checkArt == false">
+        <img src="./assets/img/home/artist.png" id="ajax-artist-show" alt="" (click)="fetchArtists()">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="fetch-data" class="container">
+  <div *ngIf="checkAlb" class="row">
+    <div class="col-md-3 fetch-intro" *ngFor="let album of albums">
+      <img src="./assets/img/albums/{{ album.imageName }}" alt="" style="width:50%" />
+    </div>
+  </div>
+  <div *ngIf="checkSty" class="row">
+    <div class="col-md-3 fetch-intro" *ngFor="let style of styles">
+      <p class="text-primary">{{ style.name }}</p>
+    </div>
+  </div>
+  <div *ngIf="checkArt" class="row">
+    <div class="col-md-3 fetch-intro" *ngFor="let artist of artists">
+      <p class="text-primary">{{ artist.name }}</p>
+    </div>
+  </div>
+  <section>

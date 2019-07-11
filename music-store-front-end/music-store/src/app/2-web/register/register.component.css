@@ -1,0 +1,10 @@
+#register-form {
+  padding: 2em 0 2em 17%;
+}
+
+#register-form form {
+  border: 2px solid rgb(0,0,26);
+  background-color: rgba(128,128,128, 0.2);
+  padding: 1em;
+  border-radius: 1%
+}
