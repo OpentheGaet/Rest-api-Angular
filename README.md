@@ -4,7 +4,7 @@ and Angular for the front-end.
 
 # Back-end
 So for the back-end, I use Symfony with the API Plateform which offer the way to share the data with
-the front-end application with a back-end application that is specially designed for restful api in terms
+the front-end application. It consists of a back-end application that is specially designed for restful api in terms
 of security and maintenance.  Futhermore, the framework is easily parametrable by versus the context of the
 application.
 
