@@ -13,7 +13,7 @@ For the front-end side, I use angular, because it allows to build complexe appli
 compilation of typescript language, which allows to write some clean and maintenable code. It also offers some
 functionnality (guards, observalble, forms) for building the application that are very pratical.
 
-For uploading files, a bit of node js code allows the uploading in the asset folder of angular
+For uploading files, a bit of node js code allows the uploading in the asset folder of Angular.
 
 # Principles of the application
 The project is about a blog that displays albums on wich visitors can let a comment for an album
