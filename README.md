@@ -25,7 +25,7 @@ some comment about an album.
 The admin can log on the admin part, after being identified by the application, he can manage the application
 while creating albums, styles, artists...
 
-The system is protected via the guard system wich allows the visitors to be identified as users or an 
+The system is protected via the guard system wich allows the visitors to be identified as users or as an 
 administrator, if the visitors is not identified, they can not access to the protected part of the application
 or can not let a comment.
 
