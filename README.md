@@ -29,8 +29,9 @@ The system is protected via the guard system wich allows the visitors to be iden
 administrator, if the visitors is not identified, they can not access to the protected part of the application
 or can not let a comment.
 
-Furthermore, a token is necessary to be connected to the application, so that for managing the appliacation
-or symply for leting a comment.  That token changes at all reloading of pages or in after five minutes.
+Furthermore, a token is necessary to be connected to the application for managing the appliacation
+or symply for leting a comment.  That token changes at all reloading of pages or in after five minutes thanks to 
+the observable.
 
 Lastly, the system is protected with cors exchange using the nelmio bundle, so that to restrict 
 the requests only for the application.
