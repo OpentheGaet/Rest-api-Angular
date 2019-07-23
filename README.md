@@ -26,11 +26,12 @@ The admin can log on the admin part, after being identified by the application, 
 while creating, updating or deleting (CRUD) albums, styles, artists...
 
 The system is protected via the guard system wich allows the visitors to be identified as users or as an 
-administrator, if the visitors is not identified, they can not access to the protected part (Admin) as a user or can not let a comment.
+administrator, if the visitors is not identified, they can not access to the protected part (Admin) as a user 
+or can not let a comment.
 
-Furthermore, a token is necessary to be connected to the application for managing the appliacation
+Furthermore, a token is necessary to be connected to the application and for managing the appliacation
 or symply for leting a comment.  That token changes at all reloading of pages or, after five minutes thanks to 
-the observable, if the token is absent or bad, users or visitors can not executing CRUD.
+an observable, if the token is absent or bad, users or visitors can not executing CRUD.
 
 Lastly, the system is protected with cors exchange using the nelmio bundle, so that to restrict 
 the requests only for the application's URL.
