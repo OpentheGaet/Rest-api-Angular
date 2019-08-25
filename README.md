@@ -23,17 +23,18 @@ So a user can be registered on the register page, therefore users can be connect
 some comment about an album.
 
 The admin can log on the admin part, after being identified by the application, he can manage the application
-while creating albums, styles, artists...
+while creating, updating or deleting (CRUD) albums, styles, artists...
 
-The system is protected via the guard system wich allows the visitors to be identified as users or an 
-administrator, if the visitors is not identified, they can not access to the protected part of the application
+The system is protected via the guard system wich allows the visitors to be identified as users or as an 
+administrator, if the visitors is not identified, they can not access to the protected part (Admin) as a user 
 or can not let a comment.
 
-Furthermore, a token is necessary to be connected to the application, so that for managing the appliacation
-or symply for leting a comment.  That token changes at all reloading of pages or in after five minutes.
+Furthermore, a token is necessary to be connected to the application and for managing the appliacation
+or symply for leting a comment.  That token changes at all reloading of pages or, after five minutes thanks to 
+an observable, if the token is absent or bad, users or visitors can not executing CRUD.
 
 Lastly, the system is protected with cors exchange using the nelmio bundle, so that to restrict 
-the requests only for the application.
+the requests only for the application's URL.
 
 # Contact
 
