@@ -4,38 +4,60 @@
       <form [formGroup]="regForm">
         <div class="form-group">
           <label for="user-name">Name</label>
+          <span *ngIf="name.touched && name.errors"
+                 class="register-problem">The name field is required</span>
           <input formControlName="name" class="form-control" id="user-name" placeholder="type your name">
         </div>
         <div class="form-group">
           <label for="user-firstname">Firstname</label>
+          <span *ngIf="firstname.touched && firstname.errors"
+                 class="register-problem">The firstname field is required</span>
           <input formControlName="firstname" class="form-control" id="user-firstname" placeholder="type your firstname">
         </div>
         <div class="form-group">
           <label for="user-address">Address</label>
+          <span *ngIf="address.touched && address.errors"
+                 class="register-problem">The address field is required</span>
           <input formControlName="address" class="form-control" id="user-address" placeholder="type an address">
         </div>
         <div class="form-group">
           <label for="user-number">Number</label>
+          <span *ngIf="number.touched && number.errors"
+                 class="register-problem">The number field is required</span>
           <input type="number" formControlName="number" class="form-control" id="user-number" placeholder="type a number">
         </div>
         <div class="form-group">
           <label for="user-postal">Postal</label>
+          <span *ngIf="postal.touched && postal.errors"
+                 class="register-problem">The number field is required</span>
           <input type="number" formControlName="postal" class="form-control" id="user-postal" placeholder="type a postal code">
         </div>
         <div class="form-group">
           <label for="user-city">City</label>
+          <span *ngIf="city.touched && city.errors"
+                 class="register-problem">The city field is required</span>
           <input formControlName="city" class="form-control" id="user-city" placeholder="type a city">
         </div>
         <div class="form-group">
             <label for="user-email">Email</label>
+            <span *ngIf="email.touched && email.errors"
+                   class="register-problem">Email must be a valid address</span>
             <input type="email" formControlName="email" class="form-control" id="user-email" placeholder="type an email">
           </div>
         <div class="form-group">
           <label for="user-pass">Password</label>
+          <span *ngIf="password.touched && password.errors"
+                 class="register-problem">The password field is required</span>
+          <span *ngIf="confirm.value == 'bad credentials'"
+                 class="register-problem">The password are not the same</span>
           <input type="password" formControlName="password" class="form-control" id="user-pass" placeholder="type a password">
         </div>
         <div class="form-group">
-          <label for="confirm-pass">Confirm Password</label>
+          <label for="confirm-pass">The confirmation field is required</label>
+          <span *ngIf="confirm.touched && confirm.errors"
+                 class="register-problem">Email must be a valid address</span>
+          <span *ngIf="confirm.value == 'bad credentials'"
+                 class="register-problem">The password are not the same</span>
           <input type="password" formControlName="confirm" class="form-control" id="confirm-pass" placeholder="confirm the password">
         </div>
         <button type="submit" class="btn btn-primary" [disabled]="regForm.invalid"

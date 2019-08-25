@@ -37,9 +37,18 @@
                 <form #fCreate="ngForm">
                     <div class="form-group">
                       <label for="cartist-name">Style</label>
-                      <input type="text" class="form-control" name="cartist-name" id="cartist-name" ngModel required placeholder="type an artist">
+                      <span *ngIf="fCreate.form.controls.cartist?.touched
+                                   && fCreate.form.controls.cartist?.errors"
+                             class="artist-problem">The name field is required</span>
+                      <input type="text"
+                             class="form-control"
+                             name="cartist"
+                             id="cartist-name"
+                             ngModel
+                             required
+                             placeholder="type an artist">
                     </div>
-                    <button type="submit" class="btn btn-success" [disabled]="fCreate.invalid" (click)="createArtist()">Submit</button>
+                    <button type="submit" class="btn btn-success" [disabled]="fCreate.invalid" (click)="createArtist(fCreate)">Submit</button>
                 </form>
             </div>
             <div class="modal-footer">
@@ -61,10 +70,19 @@
                 <form #fUpdate="ngForm">
                     <div class="form-group">
                       <label for="uartist-name">Style</label>
-                      <input type="text" class="form-control" name="uartist-name" id="uartist-name" ngModel required placeholder="type an artist">
+                      <span *ngIf="fUpdate.form.controls.uartist?.touched
+                                   && fUpdate.form.controls.uartist?.errors"
+                             class="artist-problem">The name field is required</span>
+                      <input type="text"
+                             class="form-control"
+                             name="uartist"
+                             id="uartist-name"
+                             ngModel
+                             required
+                             placeholder="type an artist">
                       <input type="hidden" id="id-upd-artist">
                     </div>
-                    <button type="submit" class="btn btn-success" [disabled]="fUpdate.invalid" (click)="updateArtist()">Submit</button>
+                    <button type="submit" class="btn btn-success" [disabled]="fUpdate.invalid" (click)="updateArtist(fUpdate)">Submit</button>
                 </form>
             </div>
             <div class="modal-footer">

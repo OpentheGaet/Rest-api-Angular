@@ -10,9 +10,13 @@
         <p>Date of parution : {{ album?.publishedAt | date:'yyyy-MM-dd' }}</p>
         <p>Music style : {{ album?.typesName }}</p>
         <p class="text-primary">Price : {{ album?.price }} €.</p>
-        <input type="hidden" value="{{ album?.id }}">
     </div>
   </div>
 </section>
+<section *ngIf="userName != '' " style="text-align:center; margin-top: 5em;">
+  <h1>{{ userName }} || {{ userName | reverseStr }}</h1>
+</section>
 
-<app-comment [albumId]="album?.id"></app-comment>
+<app-comment [albumId]="album?.id"
+             (userName)="getUserName($event)">
+</app-comment>

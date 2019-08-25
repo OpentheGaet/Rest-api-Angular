@@ -8,3 +8,17 @@
   padding: 1em;
   border-radius: 1%
 }
+
+.errors {
+  border : 1px solid rgb(255, 0, 0);
+}
+
+.admin-problem {
+  margin-left: 2%;
+  border: 1px solid rgb(196, 4, 4);
+  border-radius: 2px;
+  color: rgb(196, 4, 4);
+  font-weight: bold;
+  padding: 5px;
+}
+

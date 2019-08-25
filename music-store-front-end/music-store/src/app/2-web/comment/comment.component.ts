@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/auth/Auth.service';
 import { WebHeaderComponent } from '../1-template/1-header/web-header.component';
@@ -10,13 +10,17 @@ import { CommentService } from 'src/app/models/Comments/Comment.service';
   styleUrls: ['./comment.component.css'],
   providers: [AuthService, WebHeaderComponent]
 })
+
 export class CommentComponent implements OnInit {
 
-  commentForm : any;
-  logForm : any
-  isLoggedIn : boolean =  false;
   @Input() albumId : any;
+  @Output() userName = new EventEmitter<string>();
+  isLoggedIn : boolean =  false;
+  commentForm : any;
+  logForm : any;
   user : object;
+  email : any;
+  pass : any;
   comment : any;
   DBComments : any;
 
@@ -32,23 +36,20 @@ export class CommentComponent implements OnInit {
     this.getComments();
   }
 
-  setFormForComment() {
-    this.commentForm = this.formBuilder.group({
-      'comment' : ['', [Validators.required, Validators.minLength(10)]]
-    });
-  }
-
   setFormForLogIn() {
     this.logForm = this.formBuilder.group({
-      'email'    : ['', Validators.required],
-      'password' : ['', Validators.required]
+      'email'    : ['', [Validators.required, Validators.email]],
+      'password' : ['', [Validators.required]]
     });
+
+    this.email = this.logForm.controls.email;
+    this.pass = this.logForm.controls.password;
   }
 
   logIn() {
-    let id = (<HTMLInputElement>document.getElementById('id-album')).value;
-    let email = this.logForm.value.email;
-    let pass  = this.logForm.value.password;
+    let id = (<HTMLInputElement>document.querySelector('#id-album')).value;
+    let email = this.email.value;
+    let pass  = this.pass.value;
     let url = '/album/' + id;
 
     this.checkConnection();
@@ -73,11 +74,19 @@ export class CommentComponent implements OnInit {
     }
   }
 
+  setFormForComment() {
+    this.commentForm = this.formBuilder.group({
+      'comment' : ['', [Validators.required, Validators.minLength(10)]]
+    });
+
+    this.comment = this.commentForm.controls.comment;
+  }
+
   sendComment() {
-    let comment = this.commentForm.value.comment;
+    let comment = this.comment.value;
     let date    = new Date();
-    let idAlbum = (<HTMLInputElement>document.getElementById('id-album')).value;
-    let userId  = (<HTMLInputElement>document.getElementById('id-user')).value;
+    let idAlbum = (<HTMLInputElement>document.querySelector('#id-album')).value;
+    let userId  = (<HTMLInputElement>document.querySelector('#id-user')).value;
 
     let album = '/api/albums/' + idAlbum;
     let user  = '/api/users/' + userId;
@@ -97,5 +106,10 @@ export class CommentComponent implements OnInit {
   getComments() {
     this.commentService.getComments().subscribe(
       (data) => this.DBComments = data.reverse());
+  }
+
+  getUserName(name, firstname) {
+    let data = name + ' ' + firstname;
+    this.userName.emit(data);
   }
 }

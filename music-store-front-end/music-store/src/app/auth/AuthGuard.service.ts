@@ -14,6 +14,7 @@ export class AuthGuard implements CanActivate {
   : Observable <boolean> | Promise <boolean> | boolean {
 
     let warningMsg = 'Not any token is available';
+
     if (!localStorage.role || !localStorage.token) {
       return this.destroyConnexion();
     } else if (localStorage.role == '' || localStorage.token == '') {

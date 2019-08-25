@@ -1,0 +1,11 @@
+.two-way-binding {
+  margin: 20px 0;
+}
+
+.two-way-binding span {
+  border: 1px solid hsl(120, 100%, 15%);
+  border-radius: 2px;
+  background-color: hsl(120, 100%, 15%);
+  color: white;
+  padding: 10px;
+}

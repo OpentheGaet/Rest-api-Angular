@@ -1,6 +1,6 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { UsersService } from 'src/app/models/Users/Users.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -13,6 +13,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class RegisterComponent implements OnInit {
 
   regForm : any;
+  name : any;
+  firstname : any;
+  email: any;
+  address : any;
+  number : any;
+  postal : any;
+  city : any;
+  password : any;
+  confirm : any;
 
   constructor(private UsersService: UsersService, private formBuilder : FormBuilder) { }
 
@@ -22,46 +31,51 @@ export class RegisterComponent implements OnInit {
 
   setForm() {
     this.regForm = this.formBuilder.group({
-      'name' : ['', Validators.required],
-      'firstname' : ['', Validators.required],
-      'address' : ['', Validators.required],
-      'number' : ['', Validators.required],
-      'postal' : ['', Validators.required],
-      'city' : ['', Validators.required],
+      'name' : ['', [Validators.required]],
+      'firstname' : ['', [Validators.required]],
+      'address' : ['', [Validators.required]],
+      'number' : ['', [Validators.required]],
+      'postal' : ['', [Validators.required]],
+      'city' : ['', [Validators.required]],
       'email' : ['', [Validators.required, Validators.email]],
       'password' : ['', [Validators.required, Validators.minLength(5)]],
       'confirm' : ['', [Validators.required, Validators.minLength(5)]]
     });
+
+    this.name = this.regForm.controls.name;
+    this.firstname = this.regForm.controls.firstname;
+    this.address = this.regForm.controls.address;
+    this.number = this.regForm.controls.number;
+    this.postal = this.regForm.controls.postal;
+    this.city = this.regForm.controls.city;
+    this.email = this.regForm.controls.email;
+    this.password = this.regForm.controls.password;
+    this.confirm = this.regForm.controls.confirm;
   }
 
-  checkPassword(pass : any, confirm : any) {
-    let labelPass = (<HTMLLabelElement>document.getElementsByTagName('label')[7]);
-    let labelConfirm = (<HTMLLabelElement>document.getElementsByTagName('label')[8]);
+  checkPassword() {
+    let pass = this.password.value;
+    let confirm = this.confirm.value;
 
     if (pass !== confirm) {
-
-      labelPass.innerHTML = 'the password are not the same !';
-      labelConfirm.innerHTML = 'the password are not the same !';
-
-      labelPass.style.color = 'red';
-      labelConfirm.style.color = 'red';
+      this.confirm.value = 'bad credentials';
 
       return false;
     }
   }
 
   registerUser() {
-    let pass = this.regForm.value.password;
-    let confirm = this.regForm.value.confirm;
-    let name = this.regForm.value.name;
-    let fName = this.regForm.value.firstname;
-    let address = this.regForm.value.address;
-    let number = this.regForm.value.number;
-    let postal = this.regForm.value.postal;
-    let city = this.regForm.value.city;
-    let email = this.regForm.value.email;
+    let pass = this.password.value;
+    let confirm = this.confirm.value;
+    let name = this.name.value;
+    let fName = this.firstname.value;
+    let address = this.address.value;
+    let number = this.number.value;
+    let postal = this.postal.value;
+    let city = this.city.value;
+    let email = this.email.value;
 
-    if (this.checkPassword(pass, confirm) === false) {
+    if (this.checkPassword() === false) {
       return;
     }
 

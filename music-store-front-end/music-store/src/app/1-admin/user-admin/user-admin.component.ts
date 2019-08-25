@@ -15,46 +15,34 @@ export class AdminUserAdminComponent implements OnInit {
   constructor(private UsersService : UsersService) { }
 
   users : Users[];
+  warning : string;
+  user : any;
 
   ngOnInit() {
     this.getAdminUsers();
   }
 
   getAdminUsers() {
-    this.UsersService.getAdminUsers().
-    subscribe(data => this.users = data)
+    this.UsersService.getAdminUsers().subscribe(
+      data => this.users = data
+    );
   }
 
-  registerUser() {
-    let pass = (<HTMLInputElement>document.getElementById('user-pass')).value;
-    let confirm = (<HTMLInputElement>document.getElementById('confirm-pass')).value;
-    let name = (<HTMLInputElement>document.getElementById('user-name')).value;
-    let fName = (<HTMLInputElement>document.getElementById('user-firstname')).value;
-    let address = (<HTMLInputElement>document.getElementById('user-address')).value;
-    let number = (<HTMLInputElement>document.getElementById('user-number')).value;
-    let postal = (<HTMLInputElement>document.getElementById('user-postal')).value;
-    let city = (<HTMLInputElement>document.getElementById('user-city')).value;
-    let email = (<HTMLInputElement>document.getElementById('user-email')).value;
+  registerUser(form) {
 
-    let labelPass = (<HTMLLabelElement>document.getElementsByTagName('label')[6]);
-    let labelConfirm = (<HTMLLabelElement>document.getElementsByTagName('label')[7]);
+    let pass = form.controls.cpass.value;
+    let confirm = form.controls.cconfirm.value;
+    let name = form.controls.cname.value;
+    let fName = form.controls.cfirstname.value;
+    let address = form.controls.caddress.value;
+    let number = form.controls.cnumber.value;
+    let postal = form.controls.cpostal.value;
+    let city = form.controls.ccity.value;
+    let email = form.controls.cemail.value;
 
     if (pass !== confirm) {
 
-      labelPass.innerHTML = 'the password are not the same !';
-      labelConfirm.innerHTML = 'the password are not the same !';
-
-      labelPass.style.color = 'red';
-      labelConfirm.style.color = 'red';
-
-      return;
-    } else if (pass.length < 5) {
-
-      labelPass.innerHTML = 'the password field must have 5 characters at least !';
-      labelConfirm.innerHTML = 'the password field must have 5 characters at least !';
-
-      labelPass.style.color = 'red';
-      labelConfirm.style.color = 'red';
+      this.warning = 'bad credentials'
 
       return;
 
@@ -72,27 +60,79 @@ export class AdminUserAdminComponent implements OnInit {
       'roles': 'ROLE_ADMIN'
     };
 
+    console.log(data);
+
     this.UsersService.createUser(data)
     .subscribe((data: {}) => {
-      alert('ok it sends');
+      this.getAdminUsers();
+      this.warning = null;
+      form.form.reset();
+      document.getElementById('close-cre-modal').click();
     })
 
   }
 
-  pressUpdUser(user :any) {
-    this.UsersService.getUserById(user.id)
-    .subscribe(data => {
-      console.log(JSON.stringify(data));
-    (<HTMLInputElement>document.getElementById('user-name-up')).value = data[0].name;
-    (<HTMLInputElement>document.getElementById('user-firstname-up')).value = data[0].firstName;
-    (<HTMLInputElement>document.getElementById('user-address-up')).value = data[0].address;
-    (<HTMLInputElement>document.getElementById('user-number-up')).value = data[0].number;
-    (<HTMLInputElement>document.getElementById('user-postal-up')).value = data[0].postalCode;
-    (<HTMLInputElement>document.getElementById('user-city-up')).value = data[0].city;
-    (<HTMLInputElement>document.getElementById('user-email-up')).value = data[0].email;
-    (<HTMLInputElement>document.getElementById('user-id-up')).value = data[0].id;;
-      data[0].id;
-    });
+  pressUpdUser(user) {
+    this.user = user;
   }
 
+  updateUser(form) {
+
+    let pass = form.controls.upass.value;
+    let confirm = form.controls.uconfirm.value;
+    let name = form.controls.uname.value;
+    let fName = form.controls.ufirstname.value;
+    let address = form.controls.uaddress.value;
+    let number = form.controls.unumber.value;
+    let postal = form.controls.upostal.value;
+    let city = form.controls.ucity.value;
+    let email = form.controls.uemail.value;
+
+    let id = (<HTMLInputElement>document.querySelector('#user-id-up')).value;
+
+    if (pass !== confirm) {
+
+      this.warning = 'bad credentials'
+
+      return;
+
+    }
+
+    let data = {
+      'name': name,
+      'firstname': fName,
+      'address': address,
+      'number': number,
+      'postal_code': postal,
+      'city': city,
+      'email': email,
+      'password': pass,
+      'roles': 'ROLE_ADMIN'
+    };
+
+    this.UsersService.updateUser(id, data)
+    .subscribe((data : {}) => {
+      this.getAdminUsers();
+      this.warning = null;
+      form.form.reset();
+      document.getElementById('close-upd-modal').click();
+    })
+
+  }
+
+  pressDelUser(data) {
+    (<HTMLInputElement>document.querySelector('#id-del-user')).value = data.id;
+    document.querySelector('#show-del-user').innerHTML = data.first_name + ' ' + data.name;
+  }
+
+  deleteUser() {
+    let id = (<HTMLInputElement>document.querySelector('#id-del-user')).value;
+    alert(id);
+
+    this.UsersService.deleteUser(id).subscribe(
+      (data : {}) => {
+        this.getAdminUsers()
+        document.getElementById('close-del-modal').click();
+      });
+  }
 }

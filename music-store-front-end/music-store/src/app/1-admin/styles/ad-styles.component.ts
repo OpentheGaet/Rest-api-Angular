@@ -19,48 +19,45 @@ export class AdminStylesComponent implements OnInit {
 
   readStyles() {
     this.StySerices.getStyles()
-    .subscribe(data => this.styles = data);
+    .then(data => this.styles = data);
   }
 
-  createStyle() {
-    var name = (<HTMLInputElement>document.getElementById('cstyle-name')).value;
+  createStyle(style) {
+    var name = style.form.value.cstyle;
+    const data = {'name' : name };
 
-    const style = {'name' : name };
-
-    this.StySerices.createStyle(style).subscribe((data : {}) => {
+   this.StySerices.createStyle(data).then((data : {}) => {
       this.readStyles();
-      (<HTMLInputElement>document.getElementById('cstyle-name')).value = '';
+      style.form.reset();
       document.getElementById('close-cre-modal').click();
     });
   }
 
   pressDelStyle(style : any) {
-    document.getElementById('show-del-style').innerHTML = style.name;
-    (<HTMLInputElement>document.getElementById('id-del-style')).value = style.id
+    document.querySelector('#show-del-style').innerHTML = style.name;
+    (<HTMLInputElement>document.querySelector('#id-del-style')).value = style.id
   }
 
   pressUpdStyle(style : any) {
-    (<HTMLInputElement>document.getElementById('ustyle-name')).value = style.name;
-    (<HTMLInputElement>document.getElementById('id-upd-style')).value = style.id
+    (<HTMLInputElement>document.querySelector('#ustyle-name')).value = style.name;
+    (<HTMLInputElement>document.querySelector('#id-upd-style')).value = style.id
   }
 
-  updateStyle() {
-    var id = (<HTMLInputElement>document.getElementById('id-upd-style')).value;
-    var name = (<HTMLInputElement>document.getElementById('ustyle-name')).value;
+  updateStyle(style : any) {
+    let name = {'name' : style.form.value.ustyle};
+    let id = (<HTMLInputElement>document.querySelector('#id-upd-style')).value;
 
-    const style = {'name' : name};
-
-    this.StySerices.updateStyle(id, style).subscribe((data : {}) => {
+    this.StySerices.updateStyle(id, name).then((data : {}) => {
       this.readStyles();
-      (<HTMLInputElement>document.getElementById('ustyle-name')).value = '';
+      style.form.reset();
       document.getElementById('close-upd-modal').click();
     });
   }
 
   deleteStyle() {
-    var id = (<HTMLInputElement>document.getElementById('id-del-style')).value;
+    var id = (<HTMLInputElement>document.querySelector('#id-del-style')).value;
 
-    this.StySerices.deleteStyle(id).subscribe((data : {}) => {
+    this.StySerices.deleteStyle(id).then((data : {}) => {
       this.readStyles();
       document.getElementById('close-del-modal').click();
     });

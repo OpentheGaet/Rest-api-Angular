@@ -11,25 +11,28 @@ export class AuthService {
   logUrl : string = 'http://127.0.0.1:8000/web/login';
   tokUrl : string = 'http://127.0.0.1:8000/web/token';
   stateLog : boolean = false;
-  user : any;
   timeCount : Subscription;
   seconds : number;
-
-  httpOptions = {
-    headers : new HttpHeaders({
-      'Content-Type' : 'application/json',
-    })
-  }
+  user : any;
 
   constructor(private http : HttpClient, private router : Router) {}
 
+  getHttpOptions() {
+    const httpOptions = {
+      headers : new HttpHeaders({
+        'Content-Type' : 'application/json',
+      })
+    }
+    return httpOptions;
+  }
+
   getUser(logInfo : any) {
     let data = JSON.stringify(logInfo);
-    return this.http.post<Login[]>(this.logUrl, data, this.httpOptions);
+    return this.http.post<Login[]>(this.logUrl, data, this.getHttpOptions());
   }
 
   changeToken(userData : any) {
-    return this.http.post<Login[]>(this.tokUrl, userData, this.httpOptions);
+    return this.http.post<Login[]>(this.tokUrl, userData, this.getHttpOptions());
   }
 
   setUser(email : any, pass : any, url : string) {

@@ -15,7 +15,7 @@ export class IntroComponent implements OnInit {
 
   albums : Albums[];
   styles : Styles[];
-  artists : Artists[];
+  artists : Artists;
   checkAlb : boolean = false;
   checkSty : boolean = false;
   checkArt : boolean = false;
@@ -39,7 +39,7 @@ export class IntroComponent implements OnInit {
     this.checkArt = false;
     this.checkSty = true;
     this.StyService.getStyles()
-    .subscribe(data => this.styles = data);
+    .then(data => this.styles = data);
   }
 
   fetchArtists() {
@@ -47,7 +47,7 @@ export class IntroComponent implements OnInit {
     this.checkAlb = false;
     this.checkArt = true;
     this.ArtService.getArtists()
-    .subscribe(data => this.artists = data);
+    .then(data => this.artists = data);
   }
 
   setFalse() {

@@ -1,0 +1,36 @@
+<div id="title">
+    <h1>The admin users</h1>
+  </div>
+  <section class="container" id="section-home">
+    <div class="col-md-9 card" style="min-height:25em; color: white; padding: 2em;">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Firstname</th>
+                    <th>Email</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+              <!--Directives here-->
+              <ng-container *ngFor="let user of users, let i = index">
+                <ng-container *ngIf="user.roles == 'ROLE_ADMIN'">
+                  <tr class="text-dark">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.first_name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td><img src="./assets/admin/img/update.png" data-toggle="modal" data-target="#user-modal-update" (click)="pressUpdUser(user)"/></td>
+                    <td><img src="./assets/admin/img/delete.png" data-toggle="modal" data-target="#user-modal-delete" (click)="pressDelUser(user)"/></td>
+                  </tr>
+                </ng-container>
+              </ng-container>
+              <!--/Directives here-->
+            </tbody>
+        </table>
+        <button class="btn btn-success" role="button" data-toggle="modal" data-target="#user-modal-create">Add a user</button>
+    </div>
+  </section>

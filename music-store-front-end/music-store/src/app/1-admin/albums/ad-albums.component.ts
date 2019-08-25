@@ -16,8 +16,9 @@ import { HttpClient } from '@angular/common/http';
 export class AdminAlbumsComponent implements OnInit {
 
   albums : Albums[];
-  artists : Artists[];
-  styles : Styles[];
+  album : any;
+  artists : Artists;
+  styles : any;
   selArt : string;
   selSty : string;
   file : File;
@@ -42,12 +43,12 @@ export class AdminAlbumsComponent implements OnInit {
 
   readArtists() {
     this.ArtService.getArtists()
-    .subscribe(data => this.artists = data);
+    .then(data => this.artists = data);
   }
 
   readStyles() {
     this.StyService.getStyles()
-    .subscribe(data => this.styles = data);
+    .then(data => this.styles = data);
   }
 
   onChooseFile(event) {
@@ -55,25 +56,30 @@ export class AdminAlbumsComponent implements OnInit {
     this.fileName = event.target.files[0].name;
   }
 
-  createArtist() {
-    var name = (<HTMLInputElement>document.getElementById('c-album-name')).value;
-    var priceString = (<HTMLInputElement>document.getElementById('c-album-price')).value;
-    var boxArtString = (<HTMLSelectElement>document.getElementById('c-album-artist')).value;
-    var boxStyString = (<HTMLSelectElement>document.getElementById('c-album-style')).value;
+  createAlbum(form) {
+    let name = form.controls.cname.value;
+    let priceString = form.controls.cprice.value;
+    let boxArtString = form.controls.cartist.value;
+    let boxStyString = form.controls.cstyle.value;
 
-    var price = parseFloat(priceString);
-    var boxArt = '/api/artists/' + boxArtString;
-    var boxSty = '/api/types/' + boxStyString;
+    let price = parseFloat(priceString);
+    let boxArt = '/api/artists/' + boxArtString;
+    let boxSty = '/api/types/' + boxStyString;
 
-    var data = { 'artists' : boxArt, 'types' : boxSty , 'name' : name, 'imageName' : this.fileName , 'price' : price };
+    let data = { 'artists' : boxArt,
+                 'types' : boxSty ,
+                 'name' : name,
+                 'imageName' : this.fileName,
+                 'price' : price };
 
     this.AlbService.createAlbum(data)
     .subscribe((data : {}) => {
-      this.readAlbums()
+      document.getElementById('close-cre-modal').click();
+      form.form.reset();
+      this.readAlbums();
     });
 
     this.sendFile();
-
   }
 
   sendFile() {
@@ -85,33 +91,32 @@ export class AdminAlbumsComponent implements OnInit {
   }
 
   pressUpdAlbum(album) {
-    (<HTMLInputElement>document.getElementById('u-album-id')).value = album.id;
-    (<HTMLInputElement>document.getElementById('u-album-name')).value = album.name;
-    (<HTMLImageElement>document.getElementById('display-img')).src = './assets/img/albums/' + album.imageName;
-    (<HTMLInputElement>document.getElementById('img-name')).value = album.imageName;
-    (<HTMLInputElement>document.getElementById('u-album-price')).value = album.price;
-
+    this.album = album;
     this.selArt = album.artists.substring(13);
     this.selSty = album.types.substring(11);
   }
 
-  updateAlbum() {
-    var id = (<HTMLInputElement>document.getElementById('u-album-id')).value;
-    var name = (<HTMLInputElement>document.getElementById('u-album-name')).value;
-    var oldImage = (<HTMLInputElement>document.getElementById('img-name')).value;
-    var priceString = (<HTMLInputElement>document.getElementById('u-album-price')).value;
-    var boxArtString = (<HTMLSelectElement>document.getElementById('u-album-artist')).value;
-    var boxStyString = (<HTMLSelectElement>document.getElementById('u-album-style')).value;
+  updateAlbum(form) {
 
-    var price = parseFloat(priceString);
-    var boxArt = '/api/artists/' + boxArtString;
-    var boxSty = '/api/types/' + boxStyString;
+    let name = form.controls.uname.value;
+    let priceString = form.controls.uprice.value;
+    let boxArtString = form.controls.uartist.value;
+    let boxStyString = form.controls.ustyle.value;
 
-    var data = { 'artists' : boxArt, 'types' : boxSty , 'name' : name, 'imageName' : this.fileName , 'price' : price };
+    let price = parseFloat(priceString);
+    let boxArt = '/api/artists/' + boxArtString;
+    let boxSty = '/api/types/' + boxStyString;
 
-    this.AlbService.updataAlbum(id, data)
+    let oldImage = (<HTMLInputElement>document.querySelector('#old-img-name')).value;
+    let id = (<HTMLInputElement>document.querySelector('#u-album-id')).value;
+
+    let data = { 'artists' : boxArt, 'types' : boxSty , 'name' : name, 'imageName' : this.fileName , 'price' : price };
+
+    this.AlbService.updateAlbum(id, data)
     .subscribe((data : {}) => {
-      this.readAlbums()
+      document.getElementById('close-upd-modal').click();
+      form.form.reset();
+      this.readAlbums();
     });
 
     this.deleteFile(oldImage);
@@ -119,22 +124,18 @@ export class AdminAlbumsComponent implements OnInit {
     this.sendFile();
   }
 
-
-
   pressDelAlbum(album : any) {
-    document.getElementById('show-del-album').innerHTML = album.name;
-    (<HTMLInputElement>document.getElementById('id-del-album')).value = album.id;
-    (<HTMLInputElement>document.getElementById('img-album')).value = album.imageName;
+    this.album = album;
   }
 
   deleteAlbum() {
     var id = (<HTMLInputElement>document.getElementById('id-del-album')).value;
-
     var imageName = (<HTMLInputElement>document.getElementById('img-album')).value;
 
     this.AlbService.deleteAlbum(id)
     .subscribe((data : {}) => {
-      this.readAlbums()
+      document.getElementById('close-cre-modal').click();
+      this.readAlbums();
     });
 
     this.deleteFile(imageName);

@@ -1,0 +1,13 @@
+<div class="form-group"
+     [ngClass]="{
+      'has-danger': f.form.controls.email?.invalid && (f.form.controls.email?.dirty || f.form.controls.email?.touched),
+      'has-success': f.form.controls.email?.valid && (f.form.controls.email?.dirty || f.form.controls.email?.touched)
+ }">
+  <label>Email</label>
+  <input type="email"
+         class="form-control"
+         name="email"
+         [(ngModel)]="model.email"
+         required
+         pattern="[^ @]*@[^ @]*">
+</div>

@@ -15,8 +15,8 @@ import { Router } from '@angular/router';
 export class AdminConnectorComponent implements OnInit {
 
   logForm : any;
-  email : string;
-  pass : string;
+  email : any;
+  pass : any;
   logInfo : any;
   user : any;
 
@@ -30,15 +30,18 @@ export class AdminConnectorComponent implements OnInit {
 
   setForm() {
     this.logForm = this.formBuilder.group({
-      'email' : ['', Validators.required],
-      'password' : ['', Validators.required]
+      'email'    : ['', [Validators.required, Validators.email]],
+      'password' : ['', [Validators.required]]
     });
+
+    this.email = this.logForm.controls.email;
+    this.pass  = this.logForm.controls.password;
   }
 
   logIn() {
-    let email = this.logForm.value.email;
-    let pass  = this.logForm.value.password;
-    let url = '/admin/home'
+    let url = '/admin/home';
+    let email = this.email.value;
+    let pass  = this.pass.value;
 
     this.AuthService.setUser(email, pass, url);
   }

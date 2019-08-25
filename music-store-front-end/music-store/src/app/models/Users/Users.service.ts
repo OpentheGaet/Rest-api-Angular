@@ -29,6 +29,14 @@ export class UsersService {
     return this.http.post<Users[]>(this.webReg, data, this.getHttpOptions());
   }
 
+  updateUser(id : any, data : any) {
+    return this.http.put<Users[]>(this.apiUrl + '/' + id, data, this.getHttpOptions());
+  }
+
+  deleteUser(id : any) {
+    return this.http.delete<Users[]>(this.apiUrl + '/' + id, this.getHttpOptions());
+  }
+
   getAdminUsers() {
     return this.http.get<Users[]>(this.apiAdUsers);
   }

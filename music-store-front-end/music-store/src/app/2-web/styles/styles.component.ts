@@ -19,7 +19,7 @@ export class StylesComponent implements OnInit {
 
   readStyle() {
     this.StyService.getStyles()
-    .subscribe(data => this.styles = data);
+    .then(data => this.styles = data);
   }
 
 }

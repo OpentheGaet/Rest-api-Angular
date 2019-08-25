@@ -2,27 +2,147 @@
   <h1>The web users</h1>
 </div>
 <section class="container" id="section-home">
-  <div class="col-md-9 card" style="min-height:25em; color: white; padding: 2em;">
+  <div class="col-md-9 card" style="min-height:1em; color: white; padding: 2em;">
       <table class="table table-striped">
-          <thead class="thead-dark">
-              <tr>
-                  <th>#</th>
-                  <th>Name</th>
-                  <th>Firstname</th>
-                  <th>Email</th>
-                  <th>Delete</th>
-              </tr>
-          </thead>
-          <tbody>
-              <tr *ngFor="let user of users, let i = index" class="text-dark">
-                  <td>{{ i + 1 }}</td>
-                  <td>{{ user.name }}</td>
-                  <td>{{ user.first_name }}</td>
-                  <td>{{ user.email }}</td>
-                  <td><img src="./assets/admin/img/delete.png" data-toggle="modal" data-target="#album-modal-delete" (click)="pressDelAlbum(album)"/></td>
-              </tr>
-          </tbody>
+        <thead class="thead-dark">
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Firstname</th>
+            <th>Email</th>
+            <th>Watch</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users, let i = index" class="text-dark">
+            <td>{{ i + 1 }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.first_name }}</td>
+            <td>{{ user.email }}</td>
+            <td><img src="./assets/admin/img/update.png" data-toggle="modal" data-target="#user-modal-update" (click)="pressUpdUser(user)"/></td>
+            <td><img src="./assets/admin/img/delete.png" data-toggle="modal" data-target="#user-modal-delete" (click)="pressDelUser(user)"/></td>
+          </tr>
+        </tbody>
       </table>
-      <button class="btn btn-success" role="button" data-toggle="modal" data-target="#album-modal-create">Add a user</button>
   </div>
 </section>
+
+<!-- Modal for adding a user  -->
+<div class="modal" id="user-modal-update">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Updating an user</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                  <label for="user-name-up">Name</label>
+                  <input type="text"
+                         class="form-control"
+                         id="user-name-up"
+                         [value]="user.name"
+                         placeholder="type your name"
+                         readonly>
+                </div>
+                <div class="form-group">
+                  <label for="user-firstname-up">Firstname</label>
+                  <input type="text"
+                         class="form-control"
+                         id="user-firstname-up"
+                         [value]="user.first_name"
+                         placeholder="type your firstname"
+                         readonly>
+                </div>
+                <div class="form-group">
+                  <label for="user-address-up">Address</label>
+                  <input type="text"
+                         class="form-control"
+                         id="user-address-up"
+                         [value]="user.address"
+                         placeholder="type an address"
+                         readonly>
+                </div>
+                <div class="form-group">
+                  <label for="user-number-up">Number</label>
+                  <input type="number"
+                         class="form-control"
+                         id="model.unumber"
+                         [value]="user.number"
+                         placeholder="type a number"
+                         readonly>
+                </div>
+                <div class="form-group">
+                  <label for="user-postal-up">Postal</label>
+                  <input type="number"
+                         class="form-control"
+                         id="user-postal-up"
+                         [value]="user.postal_code"
+                         placeholder="type a postal code"
+                         readonly>
+                </div>
+                <div class="form-group">
+                  <label for="user-city-up">City</label>
+                  <input type="text"
+                         class="form-control"
+                         id="ucity"
+                         [value]="user.city"
+                         placeholder="type a city"
+                         readonly>
+                </div>
+                <div class="form-group">
+                  <label for="user-email-up">Email</label>
+                  <input type="email"
+                         class="form-control"
+                         id="uemail"
+                         [value]="user?.email"
+                         placeholder="type an email"
+                         readonly>
+                  </div>
+                <div class="form-group">
+                  <label for="user-pass-up">Password</label>
+                  <input type="password"
+                         class="form-control"
+                         id="user-pass-up"
+                         [value]="user.pass"
+                         placeholder="type a password"
+                         readonly>
+                </div>
+                <div class="form-group">
+                  <label for="confirm-pass-up">Confirm Password</label>
+                  <input type="password"
+                         class="form-control"
+                         id="confirm-pass-up"
+                         name="uconfirm"
+                         [value]="user.confirm"
+                         placeholder="confirm the password"
+                         readonly>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="close-upd-modal">no</button>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <!-- Modal for deleting album -->
+  <div class="modal" id="user-modal-delete">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Deleting an user</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <p>you are on the point to delete the following user : <span id="show-del-user"></span></p>
+              <input type="hidden" id="id-del-user">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteUser()">yes</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="close-del-modal">no</button>
+            </div>
+        </div>
+    </div>
+  </div>

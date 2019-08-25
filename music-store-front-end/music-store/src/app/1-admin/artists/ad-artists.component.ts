@@ -9,7 +9,7 @@ import { ArtistsService } from 'src/app/models/Artists/Artists.service';
 })
 export class AdminArtistsComponent implements OnInit {
 
-  artists : Artists[];
+  artists : Artists;
 
   constructor(private ArtService : ArtistsService) { }
 
@@ -19,17 +19,26 @@ export class AdminArtistsComponent implements OnInit {
 
   readArtists() {
     this.ArtService.getArtists()
-    .subscribe(data => this.artists = data);
+    .then(
+      data => {
+        this.artists = data;
+      },
+      msg => {
+        alert(msg);
+      }
+    );
   }
 
-  createArtist() {
-    var name = (<HTMLInputElement>document.getElementById('cartist-name')).value;
+  createArtist(artist) {
+    let name = artist.form.value.cartist;
 
     const artists = {'name' : name };
 
-    this.ArtService.createArtist(artists).subscribe((data : {}) => {
-      this.readArtists();
-      document.getElementById('close-cre-modal').click();
+    this.ArtService.createArtist(artists).then((
+      data : {}) => {
+        this.readArtists();
+        artist.form.reset();
+        document.getElementById('close-cre-modal').click();
     });
   }
 
@@ -43,24 +52,26 @@ export class AdminArtistsComponent implements OnInit {
     (<HTMLInputElement>document.getElementById('id-upd-artist')).value = artist.id
   }
 
-  updateArtist() {
-    var id = (<HTMLInputElement>document.getElementById('id-upd-artist')).value;
-    var name = (<HTMLInputElement>document.getElementById('uartist-name')).value;
+  updateArtist(artist : any) {
+    let name = {'name' : artist.form.value.uartist}
+    let id = (<HTMLInputElement>document.getElementById('id-upd-artist')).value;
 
-    const artist = {'name' : name};
 
-    this.ArtService.updateArtist(id, artist).subscribe((data : {}) => {
-      this.readArtists();
-      document.getElementById('close-upd-modal').click();
+    this.ArtService.updateArtist(id, name).then((
+      data : {}) => {
+        this.readArtists();
+        artist.form.reset();
+        document.getElementById('close-upd-modal').click();
     });
   }
 
   deleteArtist() {
-    var id = (<HTMLInputElement>document.getElementById('id-del-artist')).value;
+    let id = (<HTMLInputElement>document.getElementById('id-del-artist')).value;
 
-    this.ArtService.deleteArtist(id).subscribe((data : {}) => {
-      this.readArtists();
-      document.getElementById('close-del-modal').click();
+    this.ArtService.deleteArtist(id).then((
+      data : {}) => {
+        this.readArtists();
+        document.getElementById('close-del-modal').click();
     });
   }
 

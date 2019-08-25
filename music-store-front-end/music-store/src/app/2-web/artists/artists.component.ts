@@ -9,13 +9,19 @@ import { Artists } from '../../models/Artists/Artists.model';
 })
 export class ArtistsComponent implements OnInit {
 
-  artists : Artists[];
+  artists : Artists;
 
   constructor(private ArtService : ArtistsService) { }
 
   ngOnInit() {
-    this.ArtService.getArtists()
-    .subscribe(data => this.artists = data);
+    this.ArtService.getArtists().then(
+      data => {
+        this.artists = data;
+      },
+      msg => {
+        alert(msg);
+      }
+    )
   }
 
 }

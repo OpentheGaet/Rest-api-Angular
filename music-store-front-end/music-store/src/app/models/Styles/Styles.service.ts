@@ -20,24 +20,24 @@ export class StylesService {
   }
 
   getStyles() {
-    return this.http.get<Styles[]>(this.apiUrl);
+    return this.http.get<Styles[]>(this.apiUrl).toPromise();
   }
 
   getStyleById(id : number) {
-    return this.http.get<Styles[]>(this.apiUrl + '/' + id);
+    return this.http.get<Styles[]>(this.apiUrl + '/' + id).toPromise();
   }
 
   createStyle(style : any) {
     var data = JSON.stringify(style);
-    return this.http.post<Styles[]>(this.apiUrl, data, this.getHttpOptions());
+    return this.http.post<Styles[]>(this.apiUrl, data, this.getHttpOptions()).toPromise();
   }
 
   updateStyle(id : any, style : any) {
     var data = JSON.stringify(style);
-    return this.http.put<Styles[]>(this.apiUrl + '/' + id, data, this.getHttpOptions())
+    return this.http.put<Styles[]>(this.apiUrl + '/' + id, data, this.getHttpOptions()).toPromise();
   }
 
   deleteStyle(id : any) {
-    return this.http.delete<Styles[]>(this.apiUrl + '/' + id, this.getHttpOptions())
+    return this.http.delete<Styles[]>(this.apiUrl + '/' + id, this.getHttpOptions()).toPromise();
   }
 }

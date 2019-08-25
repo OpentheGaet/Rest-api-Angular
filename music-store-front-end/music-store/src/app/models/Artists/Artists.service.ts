@@ -20,24 +20,24 @@ export class ArtistsService {
   }
 
   getArtists() {
-    return this.http.get<Artists[]>(this.apiUrl);
+    return this.http.get<Artists>(this.apiUrl).toPromise();
   }
 
   getArtistById(id : number) {
-    return this.http.get<Artists[]>(this.apiUrl + '/' + id);
+    return this.http.get<Artists[]>(this.apiUrl + '/' + id).toPromise();
   }
 
   createArtist(artist : any) {
     var data = JSON.stringify(artist);
-    return this.http.post<Artists[]>(this.apiUrl, data, this.getHttpOptions());
+    return this.http.post<Artists[]>(this.apiUrl, data, this.getHttpOptions()).toPromise();
   }
 
   updateArtist(id : any, artist : any) {
     var data = JSON.stringify(artist);
-    return this.http.put<Artists[]>(this.apiUrl + '/' + id, data, this.getHttpOptions())
+    return this.http.put<Artists[]>(this.apiUrl + '/' + id, data, this.getHttpOptions()).toPromise();
   }
 
   deleteArtist(id : any) {
-    return this.http.delete<Artists[]>(this.apiUrl + '/' + id, this.getHttpOptions())
+    return this.http.delete<Artists[]>(this.apiUrl + '/' + id, this.getHttpOptions()).toPromise();
   }
 }

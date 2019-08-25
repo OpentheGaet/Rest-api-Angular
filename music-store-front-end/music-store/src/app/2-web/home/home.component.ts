@@ -15,6 +15,8 @@ export class HomeComponent implements OnInit {
 
   isLoggedIn : boolean = localStorage.loggedIn;
   user : any;
+  email : any;
+  pass : any;
   slider : any;
   action : any;
   lap : number = 1;
@@ -174,6 +176,9 @@ export class HomeComponent implements OnInit {
         'email' : ['', [Validators.required, Validators.email]],
         'password' : ['', Validators.required]
       });
+
+      this.email = this.connectForm.controls.email;
+      this.pass = this.connectForm.controls.password;
    }
 
    checkConnection () {

@@ -1,20 +1,23 @@
-<section class="container comment" *ngIf="isLoggedIn; else loggedOut">
+<section class="container comment" *ngIf="isLoggedIn; else isLoggedOut">
   <div class="col-md-12">
       <span class="text-primary">Let a comment : <span>{{ user.firstname }} {{ user.name }}</span></span>
       <button class="btn btn-danger" (click)="logOut()">log Out</button>
       <form [formGroup]="commentForm" class="form-group">
           <label for="comment">Enter your comment</label>
+          <span *ngIf="comment.touched && comment.errors"
+                 class="comment-problem">this field is required and must have 10 caracters at least</span>
           <textarea formControlName="comment" rows="10" cols="50" id="comment" class="form-control"></textarea>
           <input type="hidden" id="id-album" value="{{ albumId }}">
           <input type="hidden" id="id-user" value="{{ user.id }}">
       </form>
       <div class="form-group">
-          <button type="submit" class="btn btn-primary" id="send-comment" (click)="sendComment()" [disabled]="commentForm.invalid">Send comment</button>
+          <button type="submit" class="btn btn-primary" id="send-comment" (click)="sendComment()" [disabled]="commentForm.invalid">Send comment</button>&nbsp;&nbsp;
+          <button type="submit" class="btn btn-primary" id="send-comment" (click)="getUserName(user.firstname, user.name)">See user's name</button>
       </div>
   </div>
 </section>
 
-<ng-template #loggedOut>
+<ng-template #isLoggedOut>
   <section class="container comment">
     <h6>You must be connected to let a comment<span>x</span></h6>
     <div class="row">
@@ -24,10 +27,14 @@
       <form [formGroup]="logForm" class="col-md-10" action="http://localhost:3000/api/upload" method="POST" enctype="multipart/form-data">
         <div class="form-group">
           <label for="log-email">Email</label>
+          <span *ngIf="email.touched && email.errors"
+                 class="comment-problem">Email must be a valid address</span>
           <input type="email" formControlName="email" class="form-control" id="log-email" placeholder="type your name">
         </div>
         <div class="form-group">
           <label for="log-pass">Password</label>
+          <span *ngIf="pass.touched && !pass.valid"
+                 class="comment-problem">This field is required</span>
           <input type="password" formControlName="password" class="form-control" id="log-pass" placeholder="type your firstname">
         </div>
         <input type="hidden" id="id-album" value="{{ albumId }}">
@@ -38,14 +45,15 @@
   </section>
 </ng-template>
 
-<section class="container" *ngFor="let comment of DBComments">
-<div class="col-md-12 comment" *ngIf="albumId == comment.albumId">
-  <span class="text-primary">Commented by : <span>{{ comment.userFirstName }} {{ comment.userName }} on the date of : {{ comment.date | date:'short' }}</span></span>
-  <form class="form-group">
-    <label for="comment">Enter your comment</label>
-    <textarea rows="10" cols="50" id="comment" class="form-control" readonly>{{ comment.content }}</textarea>
-    <input type="hidden" id="id-album" value="{{ comment.albumId }}">
-    <input type="hidden" id="id-user" value="{{ comment.userId }}">
-  </form>
-</div>
-</section>
+<article class="container" *ngFor="let comment of DBComments">
+  <div class="col-md-12 comment" *ngIf="albumId == comment.albumId">
+    <span class="text-primary">Commented by : <span>{{ comment.userFirstName }} {{ comment.userName }} on the date of :
+        {{ comment.date | date:'short' }}</span></span>
+    <form class="form-group">
+      <label for="comment">Enter your comment</label>
+      <textarea rows="10" cols="50" id="comment" class="form-control" readonly>{{ comment.content }}</textarea>
+      <input type="hidden" id="id-album" value="{{ comment.albumId }}">
+      <input type="hidden" id="id-user" value="{{ comment.userId }}">
+    </form>
+  </div>
+</article>

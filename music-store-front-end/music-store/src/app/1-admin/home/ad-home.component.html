@@ -1,5 +1,39 @@
-
 <h1>Admin part of the music-store</h1>
+
+<section class="container" class="two-way-binding">
+  <div class="col-md-8 card">
+    <div class="form-group">
+      <label for="test">Enter some text</label>
+      <input type="text" id="test" class="form-control" [(ngModel)]="test" (keyup)="checkDisabled()">
+      <br />
+      <button type="submit" class="btn btn-success" (click)="saveInArray()" [disabled]="isDisabled">Save this</button>
+    </div>
+    <div *ngIf="test !=''">
+      <p>watch the text of test here : <span>{{ test }}</span></p>
+    </div>
+    <div *ngIf="testArr!=''">
+      <br/>
+      <button type="submit" class="btn btn-danger" (click)="deleteAllTab()">delete the whole table</button>
+      <br/><br/>
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>#</th>
+            <th>content</th>
+            <th>delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let arr of testArr, let i = index">
+            <td>{{ i + 1}}</td>
+            <td>{{ arr }}</td>
+            <td [ngStyle]="{color:getColor()}" (click)="deleteThis(arr)">delete</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
 
 <section class="container" id="section-home">
     <div class="col-md-9 card" style="height:25em; color: white" id="chart-one">

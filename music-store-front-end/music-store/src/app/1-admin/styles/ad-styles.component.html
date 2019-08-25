@@ -21,7 +21,7 @@
               </tr>
           </tbody>
       </table>
-      <button class="btn btn-success" role="button" data-toggle="modal" data-target="#style-modal-create">Add a user</button>
+      <button class="btn btn-success" role="button" data-toggle="modal" data-target="#style-modal-create">Add a style</button>
   </div>
 </section>
 
@@ -37,9 +37,18 @@
               <form #fCreate="ngForm">
                   <div class="form-group">
                     <label for="cstyle-name">Style</label>
-                    <input type="text" class="form-control" name="cstyle-name" id="cstyle-name" ngModel required placeholder="type a style">
+                    <span *ngIf="fCreate.form.controls.cstyle?.touched
+                                 && fCreate.form.controls.cstyle?.errors"
+                           class="style-problem">The name field is required</span>
+                    <input type="text"
+                           class="form-control"
+                           name="cstyle"
+                           id="cstyle-name"
+                           ngModel
+                           required
+                           placeholder="type a style">
                   </div>
-                  <button type="submit" class="btn btn-success" [disabled]="fCreate.invalid" (click)="createStyle()">Submit</button>
+                  <button type="submit" class="btn btn-success" [disabled]="fCreate.invalid" (click)="createStyle(fCreate)">Submit</button>
               </form>
           </div>
           <div class="modal-footer">
@@ -61,10 +70,13 @@
               <form #fUpdate="ngForm">
                   <div class="form-group">
                     <label for="ustyle-name">Style</label>
-                    <input type="text" class="form-control" name="ustyle-name" id="ustyle-name" ngModel required placeholder="type a style">
-                    <input type="hidden" id="id-upd-style">
+                    <span *ngIf="fUpdate.form.controls.ustyle?.touched
+                                 && fUpdate.form.controls.ustyle?.errors"
+                           class="style-problem">The name field is required</span>
+                    <input type="text" class="form-control" name="ustyle" id="ustyle-name" ngModel required placeholder="type a style">
+                    <input type="hidden" id="id-upd-style" name="ustyle-id" ngModel>
                   </div>
-                  <button type="submit" class="btn btn-success" [disabled]="fUpdate.invalid" (click)="updateStyle()">Submit</button>
+                  <button type="submit" class="btn btn-success" [disabled]="fUpdate.invalid" (click)="updateStyle(fUpdate)">Submit</button>
               </form>
           </div>
           <div class="modal-footer">
